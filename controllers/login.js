@@ -5,6 +5,9 @@ const jwt = require("jsonwebtoken");
 const login = async (req, res) => {
     const { email, password } = req.body;
     const emailLC = email.toLowerCase();
+    if (!email || !password) {
+        return res.status(400).json({success: false, message: "Email/Password cannot be blank"})
+    }
     const user = await User.findOne({ email: emailLC });
     if (!user) {
         return res.status(401).json({ success: false, message: "User not found with given email" });
