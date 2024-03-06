@@ -2,28 +2,25 @@ const createUserModel = require("../models/create-user");
 
 const createUser = async (req, res) => {
     try {
-        const { email, username, firstName, lastName, password, confirmPassword, bio, isStreamer, createdAt, avatar } = req.body;
+        const { username, firstName, lastName, email, password, confirmPassword } = req.body;
         const isNewEmail = await createUserModel.isThisEmailInUse(email);
         if (!isNewEmail) {
-            res.status(400).json({ success: false, message: "Email already in use, try sign-in" });
-        };
+            return res.status(400).json({success: false, message: "This email is already in use try sign-in"})
+        }
         const isNewUsername = await createUserModel.isThisUsernameInUse(username);
         if (!isNewUsername) {
-            res.status(400).json({ success: false, message: "Username is taken" });
-        };
+            return res.status(400).json({success: false, message: "This username is already in use try sign-in"})
+        }
         const newUser = new createUserModel({
-            email: email.toLowerCase(),
             username: username.toLowerCase(),
             firstName,
             lastName,
+            email: email.toLowerCase(),
             password,
-            bio,
-            isStreamer,
-            createdAt,
-            avatar
+            confirmPassword
         });
         await newUser.save();
-        res.status(201).send({ success: true, message: "User created successfully" });
+        res.status(200).json({success: true, message: "User created successfully", userId: newUser._id });
     } catch(error) {
         if (error.message.includes("E11000")) {
             res.status(400).json({success: false, message: "This username is already in use try sign-in"})

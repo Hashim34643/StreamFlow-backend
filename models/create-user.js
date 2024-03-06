@@ -2,11 +2,6 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
 const createUserSchema = new mongoose.Schema({
-    email: {
-        type: String,
-        required: true,
-        unique: true
-    },
     username: {
         type: String,
         required: true,
@@ -20,19 +15,18 @@ const createUserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
     password: {
         type: String,
-        requird: true
+        required: true
     },
-    bio: {
-        type: String,
-    },
-    isStreamer: {
-        type: Boolean,
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now
+    points: {
+        type: Number,
+        default: 0
     },
     avatar: {
         type: Buffer
@@ -57,6 +51,7 @@ createUserSchema.methods.comparePassword = async function(password) {
         const response = await bcrypt.compare(password, this.password)
         return response;
     } catch (error) {
+        console.log(error.message);
     }
 }
 
