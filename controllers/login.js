@@ -8,7 +8,7 @@ const login = async (req, res) => {
     const user = await User.findOne({ email: emailLC });
     if (!user) {
         return res.status(401).json({ success: false, message: "User not found with given email" });
-    }
+    };
     try {
         const isMatch = await user.comparePassword(password);
         if (!isMatch) {
