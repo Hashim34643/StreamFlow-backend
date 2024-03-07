@@ -13,7 +13,7 @@ const sendForgotPasswordEmail = async (req, res) => {
     await ForgotPassword.create({ userId: user._id, token});
     const resetLink = `${req.protocol}://${req.get('host')}/reset-password/${token}`;
     await sendEmail(user.email, "Password Reset", `Click here to reset your password: ${resetLink}`);
-    res.status(200).json({success: true, message: "Password reset email sent."});
+    res.status(200).json({success: true, message: "If an account with that email exists, a password reset link has been sent"});
 }
 
 module.exports = sendForgotPasswordEmail;
