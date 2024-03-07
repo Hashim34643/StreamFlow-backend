@@ -98,9 +98,6 @@ describe("POST /create-user", () => {
         expect(response.statusCode).toBe(400);
         expect(response.body.message).toBe("Last name cannot be empty");
     });
-    afterAll(async () => {
-        await mongoose.connection.close();
-    });
     test("Should respond with status 400 and error message if email is missing or invalid", async () => {
         const newUser = {
             username: "TestUser",
