@@ -9,6 +9,7 @@ const loginRouter = require("./routes/login");
 const forgotPasswordRouter = require("./routes/forgot-password");
 const resetPasswordRouter = require("./routes/reset-password");
 const updateUserRouter = require("./routes/update-user");
+const getUserRouter = require("./routes/get-user");
 
 const app = express();
 app.use(cors());
@@ -19,6 +20,7 @@ app.use(loginRouter);
 app.use(forgotPasswordRouter);
 app.use(resetPasswordRouter);
 app.use(updateUserRouter);
+app.use(getUserRouter);
 
 const server = app.listen(6952, () => {
   console.log("Port is listening");
