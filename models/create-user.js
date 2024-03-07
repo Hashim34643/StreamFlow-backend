@@ -24,9 +24,11 @@ const createUserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    points: {
-        type: Number,
-        default: 0
+    bio: {
+        type: String,
+    },
+    isStreamer: {
+        type: Boolean
     },
     avatar: {
         type: Buffer
