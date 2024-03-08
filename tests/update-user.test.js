@@ -6,6 +6,7 @@ const User = require("../models/create-user");
 
 describe("PATCH /update-user/:userId", () => {
     let userId; 
+    let jwtToken;
 
     beforeAll(async () => {
         await mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -20,7 +21,11 @@ describe("PATCH /update-user/:userId", () => {
             bio: "Original bio",
             isStreamer: false
         });
-
+        const loginUser = await request(app).post("/login").send({
+            email: "testupdate@example.com",
+            password: "password"
+        })
+        jwtToken = loginUser.body.token;
         userId = testUser._id;
     });
 
@@ -34,6 +39,7 @@ describe("PATCH /update-user/:userId", () => {
 
         const response = await request(app)
             .patch(`/update-user/${userId}`)
+            .set("Authorization", `Bearer ${jwtToken}`)
             .send(updateData);
         
         expect(response.statusCode).toBe(200);
@@ -47,16 +53,17 @@ describe("PATCH /update-user/:userId", () => {
     test("Should respond with 404 for non-existent user ID", async () => {
         const response = await request(app)
             .patch(`/update-user/5f8d04b5b5b5b5b5b5b5b5b5`)
+            .set("Authorization", `Bearer ${jwtToken}`)
             .send({ firstName: "NewFirstName" });
-
         expect(response.statusCode).toBe(404);
         expect(response.body.success).toBe(false);
-        expect(response.body.message).toBe("User not found");
+        expect(response.body.message).toBe("Unauthorized: You can only update your own information");
     });
 
     test("Should respond with 400 for empty update data", async () => {
         const response = await request(app)
             .patch(`/update-user/${userId}`)
+            .set("Authorization", `Bearer ${jwtToken}`)
             .send({}); 
 
         expect(response.statusCode).toBe(400);
@@ -67,6 +74,7 @@ describe("PATCH /update-user/:userId", () => {
     test("Should respond with 400 for invalid field update", async () => {
         const response = await request(app)
             .patch(`/update-user/${userId}`)
+            .set("Authorization", `Bearer ${jwtToken}`)
             .send({ username: "" });
 
         expect(response.statusCode).toBe(400);
