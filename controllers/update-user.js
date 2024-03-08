@@ -1,9 +1,16 @@
 const User = require('../models/create-user');
+const jwt = require("jsonwebtoken");
 const filterUpdateFields = require("../utils/update-user-filtering");
 
 const updateUser = async (req, res) => {
   try {
+    const token = req.headers.authorization.split(" ")[1];
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    const userIdFromToken = decodedToken.userId;
     const { userId } = req.params;
+    if (userIdFromToken !== userId) {
+      return res.status(404).json({ success: false, message: "Unauthorized: You can only update your own information" });
+  }
     const allowedFields = ["firstName", "lastName", "bio", "isStreamer", "avatar"];
     const updateData = filterUpdateFields(req.body, allowedFields);
     if (Object.keys(updateData).length === 0) {
