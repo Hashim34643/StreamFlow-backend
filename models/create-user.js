@@ -27,6 +27,14 @@ const createUserSchema = new mongoose.Schema({
     bio: {
         type: String,
     },
+    followers: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }],
+    following: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }],
     isStreamer: {
         type: Boolean
     },
@@ -53,7 +61,7 @@ createUserSchema.methods.comparePassword = async function(password) {
         const response = await bcrypt.compare(password, this.password)
         return response;
     } catch (error) {
-        console.log(error.message);
+        return false;
     }
 }
 
