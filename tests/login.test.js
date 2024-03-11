@@ -33,7 +33,6 @@ describe("POST /login", () => {
             firstName: 'TestFirstName',
             lastName: 'TestLastName',
             email: 'william123@gmail.com',
-            points: 0,
         });
     });
     test("Should respond with 401 if user details do not match details in database", async () => {
@@ -45,9 +44,6 @@ describe("POST /login", () => {
         expect(response.statusCode).toBe(401)
         expect(response.body.success).toBe(false);
         expect(response.body.message).toBe("User not found with given email")
-    });
-    afterAll(async () => {
-        await mongoose.connection.close();
     });
     test("Should respond with 400 if missing data", async () => {
         const invalidLoginInfo = {
