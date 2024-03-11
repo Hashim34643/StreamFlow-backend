@@ -24,7 +24,7 @@ app.use(updateUserRouter);
 app.use(getUserRouter);
 app.use(followUserRouter);
 
-const server = app.listen(6953, () => {
+const server = app.listen(6954, () => {
   console.log("Port is listening");
 });
 server.timeout = 60000;
