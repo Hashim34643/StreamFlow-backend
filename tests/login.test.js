@@ -45,9 +45,6 @@ describe("POST /login", () => {
         expect(response.body.success).toBe(false);
         expect(response.body.message).toBe("User not found with given email")
     });
-    afterAll(async () => {
-        await mongoose.connection.close();
-    });
     test("Should respond with 400 if missing data", async () => {
         const invalidLoginInfo = {
             password: "notindb"
