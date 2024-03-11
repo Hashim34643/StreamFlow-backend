@@ -11,6 +11,7 @@ const resetPasswordRouter = require("./routes/reset-password");
 const updateUserRouter = require("./routes/update-user");
 const getUserRouter = require("./routes/get-user");
 const {followUserRouter} = require("./routes/create-user");
+const {unfollowUserRouter} = require("./routes/create-user");
 
 const app = express();
 app.use(cors());
@@ -23,6 +24,7 @@ app.use(resetPasswordRouter);
 app.use(updateUserRouter);
 app.use(getUserRouter);
 app.use(followUserRouter);
+app.use(unfollowUserRouter);
 
 const server = app.listen(6954, () => {
   console.log("Port is listening");
