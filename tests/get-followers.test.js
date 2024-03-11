@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const mongoURI = require("../models/db");
 const User = require("../models/create-user");
 
-describe("POST /:userId/follow/:streamerId", () => {
+describe("GET /following/:userId", () => {
     let jwtToken1, jwtToken2, userId1, userId2;
 
   beforeAll(async () => {
