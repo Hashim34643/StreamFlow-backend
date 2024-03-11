@@ -71,4 +71,41 @@ const followUser = async (req, res) => {
     }
 };
 
-module.exports = {createUser, followUser};
+const unfollowUser = async (req, res) => {
+    if (!req.headers.authorization) {
+        return res.status(401).json({success: false, message: "No authorization token provided"});
+    }
+
+    const token = req.headers.authorization.split(" ")[1];
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    const userIdFromToken = decodedToken.userId;
+
+    const { userId, streamerId } = req.params;
+
+    if (userIdFromToken !== userId) {
+        return res.status(403).json({ success: false, message: "Unauthorized: You can only perform actions on your own account" });
+    }
+
+    try {
+        const user = await User.findById(userId);
+        const streamer = await User.findById(streamerId);
+
+        if (!user || !streamer) {
+            return res.status(404).json({ success: false, message: "User or streamer not found" });
+        }
+
+        if (!user.following.includes(streamerId)) {
+            return res.status(400).json({ success: false, message: "You are not following this user" });
+        }
+
+        await User.findByIdAndUpdate(userId, { $pull: { following: streamerId } });
+        await User.findByIdAndUpdate(streamerId, { $pull: { followers: userIdFromToken } });
+
+        res.status(200).json({ success: true, message: "Successfully unfollowed the user" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: "Error unfollowing user", error: error.message });
+    }
+}
+
+module.exports = {createUser, followUser, unfollowUser};
