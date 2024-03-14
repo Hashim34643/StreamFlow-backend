@@ -46,7 +46,7 @@ const startStream = async (req, res) => {
             return res.status(404).json({ success: false, message: "User not found" });
         }
 
-        res.status(200).json({ success: true, message: "Stream started successfully", user: updatedUser });
+        res.status(200).json({ success: true, message: "Stream started successfully", user: updatedUser, streamId: newStream._id });
     } catch (error) {
         console.error(error);
         res.status(500).json({ success: false, message: "Error starting stream", error: error.message });
