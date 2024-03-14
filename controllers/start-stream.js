@@ -1,5 +1,6 @@
 const User = require('../models/create-user');
 const jwt = require("jsonwebtoken");
+const Stream = require("../models/stream");
 
 const startStream = async (req, res) => {
     const { userId } = req.params;
@@ -22,6 +23,14 @@ const startStream = async (req, res) => {
     if (user.liveStatus && user.isStreaming) {
         return res.status(400).json({ success: false, message: "Stream is already live" });
     }
+
+    const newStream = new Stream({
+        userId: userId,
+        streamTitle: streamTitle,
+        streamDescription: streamDescription,
+    });
+
+    await newStream.save();
 
     try {
         const updatedUser = await User.findByIdAndUpdate(userId, {
