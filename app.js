@@ -14,6 +14,7 @@ const {followUserRouter} = require("./routes/create-user");
 const {unfollowUserRouter} = require("./routes/create-user");
 const getUserFollowersRouter = require("./routes/get-followers");
 const getUserFollowingRouter = require("./routes/get-following,js");
+const deleteAccountRouter = require("./routes/delete-user");
 
 const app = express();
 app.use(cors());
@@ -29,6 +30,7 @@ app.use(followUserRouter);
 app.use(unfollowUserRouter);
 app.use(getUserFollowersRouter);
 app.use(getUserFollowingRouter);
+app.use(deleteAccountRouter);
 
 const server = app.listen(6954, () => {
   console.log("Port is listening");
