@@ -15,6 +15,10 @@ const sendMessage = async (req, res) => {
     const { streamId } = req.params;
     const { content } = req.body;
 
+    if (content && content.trim().length === 0) {
+        return res.status(400).json({success: false, message: "Comment cannot be empty"})
+    }
+
     const user = await User.findById(userIdFromToken);
     if (!user) {
         return res.status(404).json({ success: false, message: "User not found" });
