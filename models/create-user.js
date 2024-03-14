@@ -40,20 +40,47 @@ const createUserSchema = new mongoose.Schema({
     },
     avatar: {
         type: Buffer
-    }
+    },
+    isStreaming: {
+        type: Boolean, default: false
+    },
+    streamTitle: { 
+        type: String, default: ""
+    },
+    streamDescription: { 
+        type: String, default: "" },
+    liveStatus: { type: Boolean, default: false 
+    },
+    streamKey: { 
+        type: String, unique: true 
+    },
+    streamViews: { 
+        type: Number, default: 0 
+    },
+    totalStreamViews: { 
+        type: Number, default: 0 
+    },
+    streamTags: [
+        { 
+            type: String 
+        }
+    ],
+    streamImage: { 
+        type: String 
+    },
 });
 
-createUserSchema.pre("save", function(next) {
+createUserSchema.pre("save", function (next) {
     if (this.isModified("password")) {
         bcrypt.hash(this.password, 8, (err, hash) => {
-            if(err) return next(err);
+            if (err) return next(err);
             this.password = hash;
             next();
         })
     }
 })
 
-createUserSchema.methods.comparePassword = async function(password) {
+createUserSchema.methods.comparePassword = async function (password) {
     if (!password) {
         throw new Error("Password is missing!");
     };
@@ -65,34 +92,34 @@ createUserSchema.methods.comparePassword = async function(password) {
     }
 }
 
-createUserSchema.statics.isThisEmailInUse = async function(email) {
+createUserSchema.statics.isThisEmailInUse = async function (email) {
     if (!email) {
         throw new Error("Invalid email");
     }
     try {
-        const user = await this.findOne({email});
+        const user = await this.findOne({ email });
         if (user) {
-            return false 
+            return false
         } else {
             return true
         }
-    } catch(error) {
+    } catch (error) {
         return false;
     }
 }
 
-createUserSchema.statics.isThisUsernameInUse = async function(username) {
+createUserSchema.statics.isThisUsernameInUse = async function (username) {
     if (!username) {
         throw new Error("Invalid username");
     }
     try {
-        const user = await this.findOne({username});
+        const user = await this.findOne({ username });
         if (user) {
-            return false 
+            return false
         } else {
             return true
         }
-    } catch(error) {
+    } catch (error) {
         return false;
     }
 }
