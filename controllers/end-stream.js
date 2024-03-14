@@ -16,6 +16,12 @@ const endStream = async (req, res) => {
         return res.status(403).json({ success: false, message: "Unauthorized: You can only end a stream for your own account" });
     }
 
+    const user = await User.findById(userId);
+
+    if (!user.liveStatus && !user.isStreaming) {
+        return res.status(400).json({ success: false, message: "Stream is not currently live" });
+    }
+
     try {
         const updatedUser = await User.findByIdAndUpdate(userId, {
             $set: {
