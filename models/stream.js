@@ -10,6 +10,10 @@ const streamSchema = new mongoose.Schema({
     streamDescription: {
         type: String 
     },
+    liveStatus: {
+        type: Boolean,
+        default: false
+    },
     startTime: {
         type: Date, default: Date.now 
     },

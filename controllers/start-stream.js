@@ -28,6 +28,7 @@ const startStream = async (req, res) => {
         userId: userId,
         streamTitle: streamTitle,
         streamDescription: streamDescription,
+        liveStatus: true,
     });
 
     await newStream.save();
