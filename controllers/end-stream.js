@@ -1,5 +1,6 @@
 const User = require('../models/create-user');
 const jwt = require("jsonwebtoken");
+const Stream = require("../models/stream");
 
 const endStream = async (req, res) => {
     const { userId } = req.params;
@@ -27,6 +28,12 @@ const endStream = async (req, res) => {
             $set: {
                 liveStatus: false,
                 isStreaming: false,
+            }
+        }, { new: true });
+
+        const updatedStream = await Stream.findByIdAndUpdate(userId, {
+            $set: {
+                liveStatus: false,
             }
         }, { new: true });
 

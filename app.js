@@ -18,6 +18,7 @@ const deleteAccountRouter = require("./routes/delete-user");
 const startStreamRouter = require("./routes/start-stream");
 const endStreamRouter = require("./routes/end-stream");
 const getStreamByIdRouter = require("./routes/get-stream");
+const sendMessageRouter = require("./routes/send-message");
 
 const app = express();
 app.use(cors());
@@ -37,6 +38,7 @@ app.use(deleteAccountRouter);
 app.use(startStreamRouter);
 app.use(endStreamRouter);
 app.use(getStreamByIdRouter);
+app.use(sendMessageRouter);
 
 const server = app.listen(6954, () => {
   console.log("Port is listening");
