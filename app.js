@@ -20,6 +20,7 @@ const endStreamRouter = require("./routes/end-stream");
 const getStreamByIdRouter = require("./routes/get-stream");
 const sendMessageRouter = require("./routes/send-message");
 const deleteMessageRouter = require("./routes/delete-message");
+const getChatHistoryRouter = require("./routes/get-chat-history");
 
 const app = express();
 app.use(cors());
@@ -41,6 +42,7 @@ app.use(endStreamRouter);
 app.use(getStreamByIdRouter);
 app.use(sendMessageRouter);
 app.use(deleteMessageRouter);
+app.use(getChatHistoryRouter);
 
 const server = app.listen(6954, () => {
   console.log("Port is listening");
