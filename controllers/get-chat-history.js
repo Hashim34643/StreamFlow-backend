@@ -1,7 +1,12 @@
 const Message = require('../models/send-message');
+const Stream = require("../models/stream");
 
 const getChatHistory = async (req, res) => {
     const { streamId } = req.params;
+    const stream = await Stream.findById(streamId);
+    if (!stream) {
+        return res.status(404).json({success: false, message: "Stream not found"})
+    }
 
     try {
         const messages = await Message.find({ streamId }).sort({ timestamp: 1 });
