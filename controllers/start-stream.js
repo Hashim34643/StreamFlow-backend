@@ -4,7 +4,11 @@ const Stream = require("../models/stream");
 
 const startStream = async (req, res) => {
     const { userId } = req.params;
-    const { streamTitle, streamDescription } = req.body;
+    const { streamTitle, streamDescription, category } = req.body;
+
+    if (!category) {
+        return res.status(400).json({success: false, message: "Unable to start stream, please ensure a category is selected"});
+    }
 
     if (!req.headers.authorization) {
         return res.status(401).json({ success: false, message: "No authorization token provided" });
@@ -28,6 +32,7 @@ const startStream = async (req, res) => {
         userId: userId,
         streamTitle: streamTitle,
         streamDescription: streamDescription,
+        category: category,
         liveStatus: true,
     });
 
