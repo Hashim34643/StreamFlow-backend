@@ -26,6 +26,10 @@ const streamSchema = new mongoose.Schema({
     streamViews: {
         type: Number, default: 0
     },
+    inStream: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }],
     category: {
         type: String,
         required: true,
