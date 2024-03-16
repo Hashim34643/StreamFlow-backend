@@ -15,18 +15,29 @@ const streamSchema = new mongoose.Schema({
         default: false
     },
     startTime: {
-        type: Date, default: Date.now 
+        type: Date, 
+        default: Date.now 
     },
     endTime: { 
         Date 
     },
     streamDuration: {
-        type: Number, default: 0 
+        type: Number, 
+        default: 0 
     },
     streamViews: {
-        type: Number, default: 0
+        type: Number, 
+        default: 0
+    },
+    currentViewers: {
+        type: Number,
+        default: 0,
     },
     inStream: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }],
+    uniqueViewers: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     }],
