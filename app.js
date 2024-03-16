@@ -22,6 +22,7 @@ const sendMessageRouter = require("./routes/send-message");
 const deleteMessageRouter = require("./routes/delete-message");
 const getChatHistoryRouter = require("./routes/get-chat-history");
 const getChatMessagesRouter = require("./routes/get-stream-chat");
+const enterStreamRouter = require("./routes/user-enters-stream");
 
 const app = express();
 app.use(cors());
@@ -45,6 +46,7 @@ app.use(sendMessageRouter);
 app.use(deleteMessageRouter);
 app.use(getChatHistoryRouter);
 app.use(getChatMessagesRouter);
+app.use(enterStreamRouter);
 
 const server = app.listen(6954, () => {
   console.log("Port is listening");
