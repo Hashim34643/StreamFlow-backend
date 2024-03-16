@@ -25,6 +25,11 @@ const streamSchema = new mongoose.Schema({
     },
     streamViews: {
         type: Number, default: 0
+    },
+    category: {
+        type: String,
+        required: true,
+        enum: ['Fortnite', 'Minecraft', 'League of Legends', 'Chatting', 'In Real Life']
     }
 });
 
