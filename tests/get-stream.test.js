@@ -41,7 +41,8 @@ describe("Stream Endpoints", () => {
             .set("Authorization", `Bearer ${jwtToken}`)
             .send({
                 streamTitle: "My Awesome Stream",
-                streamDescription: "This is going to be a great stream!"
+                streamDescription: "This is going to be a great stream!",
+                category: "Fortnite"
             });
 
         expect(startStreamResponse.statusCode).toBe(200);

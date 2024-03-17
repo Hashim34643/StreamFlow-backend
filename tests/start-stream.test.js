@@ -41,6 +41,7 @@ describe("POST /:userId/start-stream", () => {
             .send({
                 streamTitle: "My First Stream",
                 streamDescription: "Join my first live stream!",
+                category: "Fortnite"
             });
             console.log(response.body)
         expect(response.statusCode).toBe(200);
@@ -55,6 +56,7 @@ describe("POST /:userId/start-stream", () => {
             .send({
                 streamTitle: "Another Stream Attempt",
                 streamDescription: "Trying to start another stream.",
+                category: "Fortnite"
             });
 
         expect(response.statusCode).toBe(400);

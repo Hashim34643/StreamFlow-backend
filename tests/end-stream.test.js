@@ -39,6 +39,7 @@ describe("POST /:userId/end-stream", () => {
             .send({
                 streamTitle: "Test Stream to End",
                 streamDescription: "This is a test stream to be ended.",
+                category: "Fortnite"
             });
     });
 

@@ -37,7 +37,8 @@ describe("POST /streams/:streamId/send-message", () => {
       .set("Authorization", `Bearer ${jwtToken}`)
       .send({
         streamTitle: "My First Stream",
-        streamDescription: "Join my first live stream!"
+        streamDescription: "Join my first live stream!",
+        category: "Fortnite"
       });
 
     streamId = streamResponse.body.streamId;

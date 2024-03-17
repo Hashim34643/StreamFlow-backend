@@ -38,7 +38,8 @@ describe("DELETE /:userId/:messageId/delete", () => {
       .set("Authorization", `Bearer ${jwtToken}`)
       .send({
         streamTitle: "Test Stream",
-        streamDescription: "This is a test stream."
+        streamDescription: "This is a test stream.",
+        category: "Fortnite"
       });
     streamId = streamResponse.body.streamId; 
     const messageResponse = await request(app)
