@@ -38,6 +38,7 @@ describe("GET /chat/history/:streamId", () => {
       .send({
         streamTitle: "My Live Stream",
         streamDescription: "This is a test live stream",
+        category: "Fortnite"
       });
     streamId = startStreamResponse.body.streamId;
 
