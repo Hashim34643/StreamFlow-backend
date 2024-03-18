@@ -25,6 +25,7 @@ const getChatMessagesRouter = require("./routes/get-stream-chat");
 const enterStreamRouter = require("./routes/user-enters-stream");
 const exitStreamRouter = require("./routes/user-exits-stream");
 const getStreamsByCategoryRouter = require("./routes/get-stream-by-category");
+const searchStreamersRouter = require("./routes/search-user");
 
 const app = express();
 app.use(cors());
@@ -51,6 +52,7 @@ app.use(getChatMessagesRouter);
 app.use(enterStreamRouter);
 app.use(exitStreamRouter);
 app.use(getStreamsByCategoryRouter);
+app.use(searchStreamersRouter);
 
 const server = app.listen(6954, () => {
   console.log("Port is listening");
