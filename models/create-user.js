@@ -36,7 +36,8 @@ const createUserSchema = new mongoose.Schema({
         ref: 'User'
     }],
     isStreamer: {
-        type: Boolean
+        type: Boolean,
+        default: false
     },
     avatar: {
         type: Buffer

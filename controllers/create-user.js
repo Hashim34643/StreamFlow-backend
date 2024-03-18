@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 
 const createUser = async (req, res) => {
     try {
-        const { username, firstName, lastName, email, password, confirmPassword } = req.body;
+        const { username, firstName, lastName, email, password, confirmPassword, isStreamer } = req.body;
         const isNewEmail = await User.isThisEmailInUse(email);
         if (!isNewEmail) {
             return res.status(400).json({success: false, message: "This email is already in use try sign-in"})
@@ -18,7 +18,8 @@ const createUser = async (req, res) => {
             lastName,
             email: email.toLowerCase(),
             password,
-            confirmPassword
+            confirmPassword,
+            isStreamer
         });
         await newUser.save();
         res.status(200).json({success: true, message: "User created successfully", userId: newUser._id });
