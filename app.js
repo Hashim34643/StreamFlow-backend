@@ -27,6 +27,7 @@ const exitStreamRouter = require("./routes/user-exits-stream");
 const getStreamsByCategoryRouter = require("./routes/get-stream-by-category");
 const searchStreamersRouter = require("./routes/search-user");
 const getAllLiveStreamsRouter = require("./routes/get-streams");
+const getUserProfileRouter = require("./routes/get-user-from-token");
 
 const app = express();
 app.use(cors());
@@ -55,6 +56,7 @@ app.use(exitStreamRouter);
 app.use(getStreamsByCategoryRouter);
 app.use(searchStreamersRouter);
 app.use(getAllLiveStreamsRouter);
+app.use(getUserProfileRouter);
 
 const server = app.listen(6954, () => {
   console.log("Port is listening");
