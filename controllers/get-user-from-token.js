@@ -10,7 +10,13 @@ const getUserProfile = async (req, res) => {
         if (!user) {
             return res.status(404).json({ success: false, message: 'User not found' });
         }
-        res.json({ success: true, user });
+        let userObject = user.toObject();
+        if (user.avatar) {
+            userObject.avatar = `data:image/jpeg;base64,${user.avatar.toString('base64')}`;
+        } else {
+            userObject.avatar = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReiyHYtDJQ0t5jCs4j_PiD5ESMvPwnvHVa3w&usqp=CAU';
+        }
+        res.json({ success: true, user: userObject });
     } catch (error) {
         console.error(error);
         res.status(500).json({ success: false, message: 'Error retrieving profile' });
