@@ -44,7 +44,18 @@ const streamSchema = new mongoose.Schema({
     category: {
         type: String,
         required: true,
-        enum: ['Fortnite', 'Minecraft', 'League of Legends', 'Chatting', 'In Real Life']
+        enum: [
+            'Fortnite',
+            'Minecraft',
+            'League of Legends',
+            'Chatting',
+            'In Real Life',
+            'Grand Theft Auto V',
+            'EA Sports FC 24',
+            'Among Us',
+            `Tom Clancy's Rainbow Six Siege`,
+            'Call Of Duty: Modern Warefare III'
+          ]
     }
 });
 
