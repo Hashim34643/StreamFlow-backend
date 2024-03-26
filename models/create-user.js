@@ -40,7 +40,7 @@ const createUserSchema = new mongoose.Schema({
         default: false
     },
     avatar: {
-        type: Buffer
+        type: String
     },
     isStreaming: {
         type: Boolean, default: false
