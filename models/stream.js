@@ -56,6 +56,9 @@ const streamSchema = new mongoose.Schema({
             `Tom Clancy's Rainbow Six Siege`,
             'Call Of Duty: Modern Warefare III'
           ]
+    },
+    thumbnail: {
+        type: String
     }
 });
 
