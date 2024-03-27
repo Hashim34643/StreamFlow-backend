@@ -59,6 +59,12 @@ const streamSchema = new mongoose.Schema({
     },
     thumbnail: {
         type: String
+    },
+    streamerAvatar: {
+        type: String
+    },
+    streamerUsername: {
+        type: String
     }
 });
 
