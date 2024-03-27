@@ -53,7 +53,7 @@ const streamSchema = new mongoose.Schema({
             'Grand Theft Auto V',
             'EA Sports FC 24',
             'Among Us',
-            `Tom Clancy's Rainbow Six Siege`,
+            `Tom Clancys Rainbow Six Siege`,
             'Call Of Duty: Modern Warefare III'
           ]
     },
