@@ -34,6 +34,8 @@ const startStream = async (req, res) => {
         streamDescription: streamDescription,
         category: category,
         liveStatus: true,
+        streamerUsername: user.username,
+        streamerAvatar: user.avatar,
     });
 
     await newStream.save();
