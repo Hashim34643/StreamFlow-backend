@@ -31,11 +31,11 @@ const endStream = async (req, res) => {
             }
         }, { new: true });
 
-        const updatedStream = await Stream.findByIdAndUpdate(userId, {
-            $set: {
-                liveStatus: false,
-            }
-        }, { new: true });
+        const updatedStream = await Stream.findOneAndUpdate(
+            { userId: userId, liveStatus: true },
+            { $set: { liveStatus: false } },
+            { new: true }
+          );
 
         if (!updatedUser) {
             return res.status(404).json({ success: false, message: "User not found" });
