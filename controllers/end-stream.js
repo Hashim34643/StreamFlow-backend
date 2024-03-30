@@ -41,7 +41,7 @@ const endStream = async (req, res) => {
             return res.status(404).json({ success: false, message: "User not found" });
         }
 
-        res.status(200).json({ success: true, message: "Stream ended successfully", user: updatedUser });
+        res.status(200).json({ success: true, message: "Stream ended successfully", user: updatedUser, stream: updatedStream });
     } catch (error) {
         console.error(error);
         res.status(500).json({ success: false, message: "Error ending stream", error: error.message });
