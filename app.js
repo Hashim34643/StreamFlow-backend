@@ -30,6 +30,7 @@ const getAllLiveStreamsRouter = require("./routes/get-streams");
 const getUserProfileRouter = require("./routes/get-user-from-token");
 const getUserStreamsRouter = require("./routes/get-all-user-streams");
 const searchStreamRouter = require("./routes/search-stream");
+const isFollowingRouter = require("./routes/is-following");
 
 const app = express();
 app.use(cors());
@@ -61,6 +62,7 @@ app.use(getAllLiveStreamsRouter);
 app.use(getUserProfileRouter);
 app.use(getUserStreamsRouter);
 app.use(searchStreamRouter);
+app.use(isFollowingRouter);
 
 const server = app.listen(6954, () => {
   console.log("Port is listening");
