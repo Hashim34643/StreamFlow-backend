@@ -7,7 +7,7 @@ const searchStreams = async (req, res) => {
         const streams = await Stream.find({
             streamTitle: { $regex: new RegExp(searchTerm, 'i') },
             liveStatus: true
-        }).select('_id streamTitle streamDescription category streamerUsername liveStatus');
+        }).select('_id streamTitle streamDescription category streamerUsername liveStatus streamerAvatar');
 
         if (streams.length === 0) {
             return res.status(404).json({ success: false, message: "No streams found matching the search term" });
