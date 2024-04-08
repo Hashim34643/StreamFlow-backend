@@ -7,7 +7,7 @@ const searchStreamers = async (req, res) => {
         const streamers = await User.find({
             username: { $regex: new RegExp(searchTerm, 'i') },
             isStreamer: true, 
-        }).select('_id username firstName lastName avatar');
+        }).select('_id username firstName lastName avatar followers');
 
         if (streamers.length === 0) {
             return res.status(404).json({ success: false, message: "No streamers found" });
