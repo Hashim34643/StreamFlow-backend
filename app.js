@@ -3,6 +3,9 @@ const cors = require("cors");
 require("dotenv").config();
 const mongoose = require("mongoose");
 require("./models/db");
+const http = require("http");
+const socketIo = require("socket.io");
+const initializeWebsocketServer = require("./websocket");
 
 const {createUserRouter} = require("./routes/create-user");
 const loginRouter = require("./routes/login");
@@ -35,6 +38,10 @@ const isFollowingRouter = require("./routes/is-following");
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+
+const streamServer = http.createServer(app);
+initializeWebsocketServer(streamServer);
 
 app.use(createUserRouter);
 app.use(loginRouter);
