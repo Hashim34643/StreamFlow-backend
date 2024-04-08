@@ -28,7 +28,7 @@ const startStream = async (req, res) => {
         return res.status(400).json({ success: false, message: "Stream is already live" });
     }
 
-    const startTime = new Date();
+    const startTime = new Date.now();
 
     const newStream = new Stream({
         userId: userId,
