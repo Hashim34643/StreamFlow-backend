@@ -28,15 +28,24 @@ const startStream = async (req, res) => {
         return res.status(400).json({ success: false, message: "Stream is already live" });
     }
 
+    const startTime = new Date.now();
+
     const newStream = new Stream({
         userId: userId,
         streamTitle: streamTitle,
         streamDescription: streamDescription,
         category: category,
+        startTime: startTime,
         liveStatus: true,
         streamerUsername: user.username,
         streamerAvatar: user.avatar,
     });
+
+    const durationInterval = setInterval(async () => {
+        const currentTime = new Date();
+        const streamDuration = Math.round((currentTime - startTime) / 1000);
+        await Stream.findByIdAndUpdate(newStream._id, { streamDuration: streamDuration });
+    }, 60000);
 
     await newStream.save();
 
@@ -59,6 +68,17 @@ const startStream = async (req, res) => {
         console.error(error);
         res.status(500).json({ success: false, message: "Error starting stream", error: error.message });
     }
+    req.on('close', () => {
+        clearInterval(durationInterval);
+        const endTime = new Date();
+        const finalStreamDuration = Math.round((endTime - startTime) / 1000);
+
+        Stream.findByIdAndUpdate(newStream._id, { endTime: endTime, streamDuration: finalStreamDuration }, { new: true }, (err, updatedStream) => {
+            if (err) {
+                console.error("Error updating stream data:", err);
+            }
+        });
+    });
 };
 
 module.exports = startStream;
