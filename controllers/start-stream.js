@@ -45,7 +45,7 @@ const startStream = async (req, res) => {
         const currentTime = new Date();
         const streamDuration = Math.round((currentTime - startTime) / 1000);
         await Stream.findByIdAndUpdate(newStream._id, { streamDuration: streamDuration });
-    }, 60000);
+    }, 1000);
 
     await newStream.save();
 
