@@ -54,7 +54,8 @@ const streamSchema = new mongoose.Schema({
             'EA Sports FC 24',
             'Among Us',
             `Tom Clancys Rainbow Six Siege`,
-            'Call Of Duty: Modern Warefare III'
+            'Call Of Duty: Modern Warefare III',
+            'Education'
           ]
     },
     thumbnail: {
