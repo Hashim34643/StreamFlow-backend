@@ -40,8 +40,6 @@ app.use(cors());
 app.use(express.json());
 
 
-const server = http.createServer(app);
-initializeWebsocketServer(server);
 
 app.use(createUserRouter);
 app.use(loginRouter);
@@ -70,6 +68,9 @@ app.use(getUserProfileRouter);
 app.use(getUserStreamsRouter);
 app.use(searchStreamRouter);
 app.use(isFollowingRouter);
+
+const server = http.createServer(app);
+initializeWebsocketServer(server);
 
 server.listen(6954, () => {
   console.log("Server is listening on port 6954");
