@@ -40,8 +40,8 @@ app.use(cors());
 app.use(express.json());
 
 
-const streamServer = http.createServer(app);
-initializeWebsocketServer(streamServer);
+const server = http.createServer(app);
+initializeWebsocketServer(server);s
 
 app.use(createUserRouter);
 app.use(loginRouter);
@@ -71,9 +71,8 @@ app.use(getUserStreamsRouter);
 app.use(searchStreamRouter);
 app.use(isFollowingRouter);
 
-const server = app.listen(6954, () => {
-  console.log("Port is listening");
+server.listen(6954, () => {
+  console.log("Server is listening on port 6954");
 });
-server.timeout = 60000;
 
 module.exports = server;
