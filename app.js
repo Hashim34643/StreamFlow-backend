@@ -16,7 +16,7 @@ const getUserRouter = require("./routes/get-user");
 const {followUserRouter} = require("./routes/create-user");
 const {unfollowUserRouter} = require("./routes/create-user");
 const getUserFollowersRouter = require("./routes/get-followers");
-const getUserFollowingRouter = require("./routes/get-following,js");
+const getUserFollowingRouter = require("./routes/get-following");
 const deleteAccountRouter = require("./routes/delete-user");
 const startStreamRouter = require("./routes/start-stream");
 const endStreamRouter = require("./routes/end-stream");
@@ -41,7 +41,7 @@ app.use(express.json());
 
 
 const server = http.createServer(app);
-initializeWebsocketServer(server);s
+initializeWebsocketServer(server);
 
 app.use(createUserRouter);
 app.use(loginRouter);
